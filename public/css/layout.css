@@ -1,0 +1,63 @@
+
+body {
+    margin: 0;
+    background-color: rgb(144, 185, 187);
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 14vh;
+    background-color: cadetblue;
+    padding: 0 20px 0 0;
+}
+
+header h1 {
+    font-family: 'Baloo Thambi';
+    font-size: 54px;
+    margin: 0 10px;
+    color: midnightblue;
+}
+
+nav button {
+    height: 50px;
+    color: white;
+    background-color: midnightblue;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+main {
+    height: 86vh;
+    overflow: auto;
+}
+
+.dialog-box {
+    display: none;
+    width: 500px;
+    height: auto;
+    background-color: cadetblue;
+    border: 2px solid gray;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal .modal-footer{
+    justify-content: center;
+}
+
+.modal-footer [type=submit] {
+    width: 400px;
+}

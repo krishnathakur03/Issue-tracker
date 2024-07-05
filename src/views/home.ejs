@@ -1,0 +1,55 @@
+<nav>
+    <button type="button" id="add-project">Add Project</button>
+</nav>
+</header>
+<main>
+    <div id="cards">
+        <% for(let i=cards.length-1; i >= 0; i-- ){ %>
+            <div class="card" id="<%= cards[i]._id %>">
+                <h1><%= cards[i].project %> </h1>
+                <p>&#126; <%= cards[i].author %></p>
+            </div>
+        <% } %>
+    </div>
+
+</main>
+
+
+<div class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Project</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/" method="post">
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-2 col-form-label">Project</label>
+                      <div class="col-sm-10">
+                          <input type="text" name="project" class="form-control" aria-label="Username" placeholder="Enter Project Name" required>                          
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Description</label>
+                        <div>
+                            <textarea name="desc" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Description" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-2 col-form-label">Author</label>
+                      <div class="col-sm-10">
+                          <input type="text" name="author" class="form-control" aria-label="Username" placeholder="Enter Author Name" required>                          
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
