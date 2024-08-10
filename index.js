@@ -4,9 +4,9 @@ import express from "express";
 import path from 'path';
 import expressEjsLayouts from "express-ejs-layouts";
 
-import connectToMongodb from "./src/config/mongodb.js";
 import homeRouter from "./src/feature/home/home.routes.js";
 import projectRouter from "./src/feature/project/project.routes.js";
+import { connectToMongoose } from './src/config/mongoose.js';
 
 const app = express();
 
@@ -23,5 +23,5 @@ app.use('/project', projectRouter);
 
 app.listen(8000, ()=>{
     console.log('Server is listning on port 8000');
-    connectToMongodb();
+    connectToMongoose();
 });

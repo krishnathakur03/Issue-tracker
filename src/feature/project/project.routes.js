@@ -1,11 +1,10 @@
 import express from 'express';
-import ProjectController from './project.controller.js';
+import { addIssue, filterIssues, renderProject, searchIssues } from './project.controller.js';
 
 const projectRouter = express.Router();
-const projectController = new ProjectController();
 
-projectRouter.get('/:id', projectController.renderProject);
-projectRouter.post('/:id', projectController.addIssue);
-projectRouter.get('/:id/filter', projectController.filterIssue);
+projectRouter.route('/:id').get(renderProject).post(addIssue);
+projectRouter.get('/:id/filter', filterIssues);
+projectRouter.get('/:id/search', searchIssues);
 
 export default projectRouter;

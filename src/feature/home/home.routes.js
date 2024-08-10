@@ -1,11 +1,8 @@
 import express from 'express';
-import HomeController from './home.controller.js';
+import { addProject, renderProjects } from './home.controller.js';
 
 const homeRouter = express.Router();
 
-const homeController = new HomeController();
-
-homeRouter.get('/', homeController.renderHome);
-homeRouter.post('/', homeController.addProject);
+homeRouter.route('/').get(renderProjects).post(addProject);
 
 export default homeRouter;
