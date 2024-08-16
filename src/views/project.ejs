@@ -15,34 +15,35 @@
     
     <h3 id="issue-head" class="card-title">Issues</h3>
 
-    
-    <div id="filter-div" class="modal-body">
-        
-        <form class="form-inline" action="/project/<%= id %>/search" method="get">
+    <div class="card text-center">
+      <% if(issues.length > 0){ %>
+        <div id="filter-div" class="modal-body card-header">
+
+          <form class="form-inline" action="/project/<%= id %>/search" method="get">
             <h5 class="card-title">Search issues</h5>
             <div class="input-group mb-3">
-                <input type="search" class="form-control" name="search" id="search" placeholder="Enter issue title/description">
+                  <input type="search" class="form-control" name="search" id="search" placeholder="Enter issue title/description">
                 <button class="btn btn-primary" type="submit" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
-        </form>
-        
-        <form action="/project/<%= id %>/filter" method="get">
-            <h5 class="card-title">Filter issues</h5>
-
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="filter" value="label" onclick="labelFunc()" id="btnradio1" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="btnradio1">by label</label>
-                
-                <input type="radio" class="btn-check" name="filter" value="author" onclick="filterFunc()" id="btnradio2" autocomplete="off">
-                <label class="btn btn-outline-primary" for="btnradio2">by author</label>
-            </div>
+          </form>
             
+          <form action="/project/<%= id %>/filter" method="get">
+            <h5 class="card-title">Filter issues</h5>
+    
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+              <input type="radio" class="btn-check" name="filter" value="label" onclick="labelFunc()" id="btnradio1" autocomplete="off" checked>
+              <label class="btn btn-outline-primary" for="btnradio1">by label</label>
+                    
+              <input type="radio" class="btn-check" name="filter" value="author" onclick="filterFunc()" id="btnradio2" autocomplete="off">
+              <label class="btn btn-outline-primary" for="btnradio2">by author</label>
+            </div>
+                
             <div id="select-label">
-            <div class="form-check">
+              <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="label" value="bug" id="bug">
-                <label class="form-check-label" for="bug">
-                  Bug
-                </label>
+                  <label class="form-check-label" for="bug">
+                    Bug
+                  </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="label" value="help" id="help">
@@ -65,56 +66,65 @@
             </div>
             
             <div id="select-author" >
-                <select class="form-select" name="author" aria-label="Default select example">
-                  <option selected>--Select Author--</option>
-                  <% projectBody.issues.forEach(issue=>{ %>
-                    <option value="<%- issue.author %>"><%- issue.author %></option>
+              <select class="form-select" name="author" aria-label="Default select example">
+                <option selected>--Select Author--</option>
+                <% projectBody.issues.forEach(issue=>{ %>
+                  <option value="<%- issue.author %>"><%- issue.author %></option>
                 <% }) %>
-                </select>
+              </select>
             </div>
-
+    
             <div>
-                <!-- <button type="reset"><i class="fa-solid fa-rotate-right"></i></button> -->
-                <button type="submit" class="btn btn-primary">Filter</button>
+              <button type="submit" class="btn btn-primary">Filter</button>
             </div>
-        </form>
-    </div>
-    <div class="card text-center">
-        <div class="card-header">
-            <h5 class="card-title">Issues</h5>
+          </form>
+              
+          <% if(filtered) { %>
+            <form action="/project/<%= id %>" method="get">
+                <button type="submit" class="btn btn-dark"><i class="fa-solid fa-rotate-right"></i> Reset Filter</button>
+            </form>
+          <% } %>
         </div>
-        <% if(issues.length > 0){ %>
-            <% issues.forEach((issue)=>{ %>
-            <div class="card-body">
-          <h5 class="card-title"><%- issue.title %>
-          <% issue.labels.forEach(label=>{
-            let badgeClass;
-            switch(label){
-                case 'bug': 
-                badgeClass = 'text-bg-danger';
-                break;
-                case 'help':
-                badgeClass = 'text-bg-success';
-                break;
-                case 'hot':
-                badgeClass = 'text-bg-warning';
-                break;
-                default:
-                badgeClass = 'text-bg-primary';
-            } %>
-            <span class="badge <%- badgeClass %>"><%- label %></span>
-            <% }) %>
-        </h5>
-          <p class="card-text"><%- issue.desc %></p>
-          <footer class="blockquote-footer"><cite title="Source Title"><%- issue.author %></cite></footer>
-        </div>
-        <div class="card-footer">
+
+        <% issues.forEach((issue)=>{ %>
+          <div class="card-body">
+            <h5 class="card-title"><%- issue.title %>
+              <% issue.labels.forEach((label)=>{
+                let badgeClass;
+                switch(label){
+                  case 'bug': 
+                  badgeClass = 'text-bg-danger';
+                  break;
+                  case 'help':
+                  badgeClass = 'text-bg-success';
+                  break;
+                  case 'hot':
+                  badgeClass = 'text-bg-warning';
+                  break;
+                  default:
+                  badgeClass = 'text-bg-primary';
+                } %>
+                <span class="badge <%- badgeClass %>"><%- label %></span>
+              <% }) %>
+            </h5>
+            <p class="card-text"><%- issue.desc %></p>
+            <footer class="blockquote-footer"><cite title="Source Title"><%- issue.author %></cite></footer>
+          </div>
+          <div class="card-footer">
             <small class="text-muted"></small>
           </div>
-        <% })} else{ %>
-            <h4>Not Found!</h4>
-        <% } %>
-      </div>
+        <% }) %>
+
+      <% } else{ %>
+        <div class="card-header">
+          <h5 class="card-title">No issue found!</h5>
+          <% if(filtered){ %>
+            <form action="/project/<%= id %>" method="get">
+              <button type="submit" class="btn btn-dark"> Reset filter</button>
+            </form>
+          <% } %>
+        </div>
+      <% } %>
 
 </main>
 

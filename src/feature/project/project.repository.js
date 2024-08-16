@@ -7,14 +7,16 @@ const ProjectModel = mongoose.model('IssueDb', ProjectSchema)
 export const renderProjectRepo = async (id, issues)=> {
     
         const project = await ProjectModel.findById(id);
+        let isFiltered = true;
 
         if (!issues) {
             issues = project.issues;
+            isFiltered = false;
         }
         const css = '<link rel="stylesheet" href="/css/project.css">';
         const script = '<script src="/js/project.js"></script>';
 
-        return {title: 'Project', id: id, projectBody: project, issues: issues, css: css, script: script};
+        return {title: 'Project', id: id, projectBody: project, issues: issues, filtered: isFiltered, css: css, script: script};
 }
 
 export const addIssueRepo = async (id, data)=>{

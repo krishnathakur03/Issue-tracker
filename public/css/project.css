@@ -32,11 +32,13 @@ main {
 
 #issue-head {
     text-align: center;
+    margin: 10px;
 }
 
 #filter-div{
     display: flex;
     justify-content: space-around;
+    margin: 10px;
 }
 
 #filter-div form{

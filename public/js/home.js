@@ -5,9 +5,6 @@ const popupClose = document.querySelector('.btn-close');
 const cards = document.querySelectorAll('.card');
 
 const projectDetails = (card)=>{
-    // console.log(e);
-    console.log(card.id);
-    document.querySelector('body').style.backgroundColor = 'green';
     window.location.href = `/project/${card.id}`;
 }
 
