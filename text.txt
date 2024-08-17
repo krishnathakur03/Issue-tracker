@@ -1,7 +1,0 @@
-1.  Home Page
-    (show All Projects)
-
-2.  Project Details Page
-    (show All issues)
-
-3.  P
